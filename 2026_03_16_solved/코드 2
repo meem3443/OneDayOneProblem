@@ -1,0 +1,13 @@
+#코드 1
+N = input()
+A=""
+for i in range(8):
+    A=A+N
+
+print(A)
+
+#코드 2
+N = input()
+
+for i in range(8):
+    print(N, end="")
