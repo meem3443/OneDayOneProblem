@@ -29,3 +29,4 @@ if(m==1):
     print(n*2)
 else:
     print(total)
+
