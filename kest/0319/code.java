@@ -1,16 +1,20 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        Scanner sc = new Scanner(System.in);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        String s = sc.next();
-        sc.nextLine();
+        String s = br.readLine();
+
 
         LinkedList<Character> l = new LinkedList<>();
 
@@ -22,7 +26,7 @@ public class Main {
         ListIterator<Character> it = l.listIterator(l.size());
 
         for (int i = 0; i < m; i++) {
-            String command = sc.nextLine();
+            String command = br.readLine();
 
             if(command.equals("L")) {
                 if(it.hasPrevious()) {
@@ -48,11 +52,11 @@ public class Main {
             }
         }
 
-        for(char answer : l){
-            System.out.print(answer);
+        StringBuilder sb = new StringBuilder();
+        for (char ch : l) {
+            sb.append(ch);
         }
 
-
-
+        System.out.print(sb);
     }
 }
