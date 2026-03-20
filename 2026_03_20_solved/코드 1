@@ -1,0 +1,5 @@
+num = list(input().split())
+
+num.reverse()
+for i in range(10):
+    print(num[i], end="")
