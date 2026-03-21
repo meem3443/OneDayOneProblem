@@ -1,0 +1,8 @@
+#원소의 개수
+N = int(input())
+
+#N개의 원소
+num = list(input().split())
+
+for i in range(N):
+    print(int(num[i])**2, end = " ")
