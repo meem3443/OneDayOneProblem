@@ -3,7 +3,7 @@ n = int(input())
 # Please write your code here.
 
 def pr(n):
-    for _ in range(n):
-        print("12345^&*()_")
+    for i in range(n):
+        print(f"{i}" * 4)
 
 pr(n)
