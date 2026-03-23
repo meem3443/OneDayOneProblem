@@ -5,4 +5,4 @@ if len(sen1) < len(sen2):
 elif len(sen1) > len(sen2):
     print(sen1, len(sen1), end = " ")
 else:
-    print("same")
+    print("same.")
