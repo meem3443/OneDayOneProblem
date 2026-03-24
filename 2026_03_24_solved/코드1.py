@@ -28,4 +28,3 @@ while N <= 100:
         print("D", end = " ")
     else:
         print("F",end = " ")
-    
