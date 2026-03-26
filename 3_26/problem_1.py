@@ -1,1 +1,7 @@
-print("리투 상폐")
+N, M = map(int, input().split())
+
+
+while N > 0:
+    print(N)
+    N = N//M
+
