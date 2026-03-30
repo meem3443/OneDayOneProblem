@@ -1,6 +1,21 @@
-count = 0
-for i in range(1, 100):
-    if i % 3 == 0:
-        count += i
+def f(x):
+    return(x**2-x-1)
 
-print(count)
+def bisection_method(a, b, error):
+    if f(a)*f(b) > 0:
+        print("구간에서 근을 찾을 수 없습니다.")
+    else:
+        while (b - a)/2.0 > error:	# 오차를 계산한다. 
+            midpoint = (a + b)/2.0	# 중점을 계산한다. 
+            if f(midpoint) == 0:
+                return(midpoint) 
+            elif f(a)*f(midpoint) < 0: 
+                b = midpoint
+            else:
+                a = midpoint
+        
+        return(midpoint)
+
+answer = bisection_method(1, 2, 0.0001) #error is set to 10^-4
+
+print("x**2-x-1의 근:", answer)
