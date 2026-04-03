@@ -1,9 +1,7 @@
-N = int(input())
-
 cnt = 0
 cnt1 = 0
 
-for num in range(N):
+for num in range(10):
     num = int(input())
     if num % 3 == 0:
         cnt += 1
@@ -11,15 +9,3 @@ for num in range(N):
         cnt1 += 1
         
 print(cnt, cnt1, end = " ")
-
-
-# 7
-# 42
-# 10
-# 54
-# 34
-# 55
-# 57
-# 60
-# 30
-# 50
