@@ -1,21 +1,96 @@
-from tkinter import Tk, Label, Button
-import random
+N, M = map(int, input().split())
+K = int(input())
 
-def roll():
-    # 1~6 사이의 랜덤 숫자를 생성하여 레이블에 업데이트
-    number = random.randint(1, 6)
-    label.config(text=str(number))
+board = [list(map(int, input().split())) for _ in range(N)]
 
-window = Tk()
-window.title("tk")
-window.geometry("200x150")
+dust = set()
+for _ in range(K):
+    x, y = map(int, input().split())
+    dust.add((x - 1, y - 1))
 
-# 숫자가 표시될 레이블 (초기값 3)
-label = Label(window, text="3", font=("Arial", 24))
-label.pack(expand=True)
+visited = [[False] * M for _ in range(N)]
 
-# 굴리기 버튼
-button = Button(window, text="굴리기", command=roll)
-button.pack(pady=10)
+# 후보군
+candidates = [(-board[0][0], 0, 0)]
 
-window.mainloop()
+bag = []
+total = 0
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+
+def push(heap, item):
+    heap.append(item)
+
+    i = len(heap) - 1
+
+    while i > 0:
+        p = (i - 1) // 2
+
+        if heap[p] <= heap[i]:
+            break
+
+        heap[p], heap[i] = heap[i], heap[p]
+        i = p
+
+
+def pop(heap):
+    root = heap[0]
+
+    last = heap.pop()
+
+    if heap:
+        heap[0] = last
+
+        i = 0
+
+        while True:
+            l = i * 2 + 1
+            r = i * 2 + 2
+            smallest = i
+
+            if l < len(heap) and heap[l] < heap[smallest]:
+                smallest = l
+
+            if r < len(heap) and heap[r] < heap[smallest]:
+                smallest = r
+
+            if smallest == i:
+                break
+
+            heap[i], heap[smallest] = heap[smallest], heap[i]
+            i = smallest
+
+    return root
+
+
+while candidates:
+    neg_c, x, y = pop(candidates)
+
+    if visited[x][y]:
+        continue
+
+    visited[x][y] = True
+
+    c = -neg_c
+
+    # 꽃 획득
+    total += c
+    push(bag, -c)
+
+    # 꽃가루 구역이면 가장 큰 꽃 제거
+    if (x, y) in dust:
+        removed = -pop(bag)
+        total -= removed
+
+    # 인접 칸 추가
+    for d in range(4):
+        nx = x + dx[d]
+        ny = y + dy[d]
+
+        if 0 <= nx < N and 0 <= ny < M:
+            if not visited[nx][ny]:
+                push(candidates, (-board[nx][ny], nx, ny))
+
+print(total)
